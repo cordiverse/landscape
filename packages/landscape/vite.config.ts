@@ -2,13 +2,22 @@ import react from '@vitejs/plugin-react'
 import type { SpawnOptions } from 'node:child_process'
 import { spawn } from 'node:child_process'
 import { defineConfig } from 'vite'
+import mdx from '@mdx-js/rollup'
 
 // eslint-disable-next-line import/no-default-export
 export default defineConfig(async () => {
   const [_, versionString] = await buildVersion()
 
   return {
-    plugins: [react()],
+    plugins: [
+      {
+        enforce: 'pre',
+        ...mdx({}),
+      },
+      react({
+        include: /\.(jsx|js|mdx|md|tsx|ts)$/,
+      }),
+    ],
 
     define: {
       __DEFINE_CL_APP_VERSION_STRING__: versionString,
