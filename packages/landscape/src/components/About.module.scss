@@ -1,0 +1,11 @@
+.text {
+  font-size: 12px;
+  color: #666666;
+
+  & a {
+    text-decoration: underline #666666;
+
+    // Override :link :active :hover :visited
+    color: #666666;
+  }
+}
