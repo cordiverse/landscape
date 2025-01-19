@@ -1,0 +1,18 @@
+.panel-hide {
+  opacity: 0;
+
+  height: 80vh;
+
+  transition: opacity 0.3s ease;
+}
+
+.panel-show {
+  @extend .panel-hide;
+  opacity: 1;
+}
+
+.container {
+  overflow-y: auto;
+
+  color: var(--xy-node-color, var(--xy-node-color-default));
+}
