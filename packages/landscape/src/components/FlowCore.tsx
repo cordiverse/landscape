@@ -1,4 +1,9 @@
-import type { DefaultEdgeOptions, NodeTypes, ProOptions } from '@xyflow/react'
+import type {
+  DefaultEdgeOptions,
+  NodeTypes,
+  OnSelectionChangeFunc,
+  ProOptions,
+} from '@xyflow/react'
 import {
   applyNodeChanges,
   Background,
@@ -7,11 +12,11 @@ import {
 } from '@xyflow/react'
 import { useCallback, useState } from 'react'
 import { About } from './About'
-import { Content } from './Content'
+import { Content, useContent } from './Content'
 import styles from './FlowCore.module.scss'
 import { edges, initialNodes } from './data'
 import { CLBaseNode, CLBottomNode, CLNode, CLTopNode } from './flow/CLNode'
-import type { CLNodeChange } from './flow/types'
+import type { CLEdgeType, CLNodeChange, CLNodeType } from './flow/types'
 
 const nodeTypes: NodeTypes = {
   CLBaseNode,
@@ -40,6 +45,17 @@ export const FlowCore = () => {
     [setNodes],
   )
 
+  const { setSelectionContent } = useContent()
+  const handleSelectionChange = useCallback<
+    (params: { nodes: CLNodeType[]; edges: CLEdgeType[] }) => void
+  >(
+    ({ nodes, edges }) =>
+      setSelectionContent(
+        nodes[0]?.data.content || edges[0]?.data?.content || null,
+      ),
+    [setSelectionContent],
+  ) as OnSelectionChangeFunc
+
   return (
     <div className={styles['container']}>
       <ReactFlow
@@ -52,6 +68,7 @@ export const FlowCore = () => {
         nodesConnectable={false}
         fitView
         proOptions={proOptions}
+        onSelectionChange={handleSelectionChange}
       >
         <Content />
         <About />
