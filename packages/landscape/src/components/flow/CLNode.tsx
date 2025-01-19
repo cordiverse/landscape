@@ -1,20 +1,35 @@
 import { Handle, Position } from '@xyflow/react'
 import type { HTMLAttributes } from 'react'
-import { forwardRef } from 'react'
+import { forwardRef, useCallback } from 'react'
+import { useContent } from '../Content'
 import styles from './CLNode.module.scss'
 import type { CLNodeProps } from './types'
 
 export const CLBaseNode = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement> & CLNodeProps
->(({ ...props }, ref) => (
-  <div
-    ref={ref}
-    tabIndex={0}
-    className=" react-flow__background react-flow__node-default"
-    {...props}
-  />
-))
+>(({ ...props }, ref) => {
+  const { setHoverContent } = useContent()
+
+  const handlePointerEnter = useCallback(() => {
+    setHoverContent(props.data.content)
+  }, [props.data.content, setHoverContent])
+
+  const handlePointerLeave = useCallback(() => {
+    setHoverContent(null)
+  }, [setHoverContent])
+
+  return (
+    <div
+      ref={ref}
+      tabIndex={0}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
+      className=" react-flow__background react-flow__node-default"
+      {...props}
+    />
+  )
+})
 
 CLBaseNode.displayName = 'CLBaseNode'
 
