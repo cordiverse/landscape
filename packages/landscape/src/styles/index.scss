@@ -1,1 +1,9 @@
 @use 'reset';
+
+.react-flow__attribution {
+  display: none;
+}
+
+.react-flow.dark {
+  --xy-edge-stroke-width-default: 1;
+}
