@@ -4,13 +4,12 @@ import { createContext, useContext } from 'react'
 import styles from './Content.module.scss'
 
 export interface ContentContextType {
-  lastContent: ReactNode | null
   selectionContent: ReactNode | null
-  selectionShow: boolean
+  lastSelectionContent: ReactNode | null
   hoverContent: ReactNode | null
-  hoverShow: boolean
-  setSelectionContent: (value: ReactNode) => void
-  setHoverContent: (value: ReactNode) => void
+  lastHoverContent: ReactNode | null
+  setSelection: (value: ReactNode) => void
+  setHover: (value: ReactNode) => void
 }
 
 export const ContentContext = createContext<ContentContextType>(
@@ -21,22 +20,24 @@ export const useContent = () => useContext(ContentContext)
 
 export const Content = () => {
   const {
-    selectionShow,
+    lastSelectionContent,
     selectionContent,
-    hoverShow,
+    lastHoverContent,
     hoverContent,
-    lastContent,
   } = useContent()
 
-  const show = selectionShow || hoverShow
-  const renderContent = hoverContent || selectionContent || lastContent || <></>
+  const show = selectionContent || hoverContent
+  const renderContent = hoverContent ||
+    selectionContent ||
+    lastSelectionContent ||
+    lastHoverContent || <></>
 
   return (
     <Panel
       className={show ? styles['panel-show'] : styles['panel-hide']}
       position="top-right"
     >
-      <div className={styles['container']}>{renderContent}</div>
+      {renderContent}
     </Panel>
   )
 }

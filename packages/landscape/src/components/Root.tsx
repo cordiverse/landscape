@@ -5,53 +5,50 @@ import { ContentContext } from './Content'
 import { FlowCore } from './FlowCore'
 
 export const Root = () => {
-  const [lastContent, setLastContentIntl] = useState<ReactNode | null>(null)
-  const [selectionContent, setSelectionContentIntl] =
+  const [selectionContent, setSelectionContent] = useState<ReactNode | null>(
+    null,
+  )
+  const [lastSelectionContent, setLastSelectionContent] =
     useState<ReactNode | null>(null)
-  const [selectionShow, setSelectionShow] = useState<boolean>(false)
-  const [hoverContent, setHoverContentIntl] = useState<ReactNode | null>(null)
-  const [hoverShow, setHoverShow] = useState<boolean>(false)
+  const [hoverContent, setHoverContent] = useState<ReactNode | null>(null)
+  const [lastHoverContent, setLastHoverContent] = useState<ReactNode | null>(
+    null,
+  )
 
-  const setSelectionContent = useCallback((newContent: ReactNode | null) => {
-    if (newContent) {
-      setLastContentIntl(newContent)
-      setSelectionContentIntl(newContent)
-      setSelectionShow(true)
-    } else {
-      setSelectionContentIntl(null)
-      setSelectionShow(false)
-    }
-  }, [])
+  const setSelection = useCallback(
+    (newContent: ReactNode | null) => {
+      setSelectionContent(newContent)
+      if (newContent) setLastSelectionContent(newContent)
+      if (!hoverContent) setLastHoverContent(null)
+    },
+    [hoverContent],
+  )
 
-  const setHoverContent = useCallback((newContent: ReactNode | null) => {
-    if (newContent) {
-      setLastContentIntl(newContent)
-      setHoverContentIntl(newContent)
-      setHoverShow(true)
-    } else {
-      setHoverContentIntl(null)
-      setHoverShow(false)
-    }
-  }, [])
+  const setHover = useCallback(
+    (newContent: ReactNode | null) => {
+      setHoverContent(newContent)
+      if (newContent) setLastHoverContent(newContent)
+      if (!selectionContent) setLastSelectionContent(null)
+    },
+    [selectionContent],
+  )
 
   const contentContextValue = useMemo<ContentContextType>(
     () => ({
-      lastContent,
       selectionContent,
-      selectionShow,
+      lastSelectionContent,
       hoverContent,
-      hoverShow,
-      setSelectionContent,
-      setHoverContent,
+      lastHoverContent,
+      setSelection,
+      setHover,
     }),
     [
-      hoverContent,
-      hoverShow,
-      lastContent,
       selectionContent,
-      selectionShow,
-      setHoverContent,
-      setSelectionContent,
+      lastSelectionContent,
+      hoverContent,
+      lastHoverContent,
+      setSelection,
+      setHover,
     ],
   )
 

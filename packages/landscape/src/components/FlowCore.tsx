@@ -45,15 +45,13 @@ export const FlowCore = () => {
     [setNodes],
   )
 
-  const { setSelectionContent } = useContent()
+  const { setSelection } = useContent()
   const handleSelectionChange = useCallback<
     (params: { nodes: CLNodeType[]; edges: CLEdgeType[] }) => void
   >(
     ({ nodes, edges }) =>
-      setSelectionContent(
-        nodes[0]?.data.content || edges[0]?.data?.content || null,
-      ),
-    [setSelectionContent],
+      setSelection(nodes[0]?.data.content || edges[0]?.data?.content || null),
+    [setSelection],
   ) as OnSelectionChangeFunc
 
   return (

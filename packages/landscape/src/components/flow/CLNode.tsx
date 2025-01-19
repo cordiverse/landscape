@@ -9,15 +9,15 @@ export const CLBaseNode = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement> & CLNodeProps
 >(({ ...props }, ref) => {
-  const { setHoverContent } = useContent()
+  const { setHover } = useContent()
 
   const handlePointerEnter = useCallback(() => {
-    setHoverContent(props.data.content)
-  }, [props.data.content, setHoverContent])
+    setHover(props.data.content)
+  }, [props.data.content, setHover])
 
   const handlePointerLeave = useCallback(() => {
-    setHoverContent(null)
-  }, [setHoverContent])
+    setHover(null)
+  }, [setHover])
 
   return (
     <div
