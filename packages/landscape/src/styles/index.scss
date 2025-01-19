@@ -7,3 +7,20 @@
 .react-flow.dark {
   --xy-edge-stroke-width-default: 1;
 }
+
+.react-flow__edge-path {
+  transition: stroke 0.1s ease;
+}
+
+.react-flow__node-default {
+  pointer-events: all;
+  transition: border-color 0.1s ease;
+
+  &:hover {
+    border-color: #aaaaaa;
+  }
+
+  .selected > & {
+    border-color: #666666;
+  }
+}
