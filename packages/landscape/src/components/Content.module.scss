@@ -15,12 +15,16 @@
     --xy-node-background-color,
     var(--xy-node-background-color-default)
   );
+
+  & a {
+    text-decoration: none;
+
+    // Override :link :active :hover :visited
+    color: var(--xy-node-color, var(--xy-node-color-default));
+  }
 }
 
 .panel-show {
   @extend .panel-hide;
   opacity: 1;
-}
-
-.container {
 }
