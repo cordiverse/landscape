@@ -6,15 +6,19 @@ import type {
   NodeChange,
   NodeProps,
 } from '@xyflow/react'
+import type { ReactNode } from 'react'
 
 export interface CLNodeData {
-  label: string
+  title: string
+  content: ReactNode
+  icon?: boolean | undefined
 
   [K: string]: unknown
 }
 
 export interface CLEdgeData {
   primary?: boolean | undefined
+  content?: ReactNode | undefined
 
   [K: string]: unknown
 }
