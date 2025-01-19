@@ -10,7 +10,7 @@ import {
   BackgroundVariant,
   ReactFlow,
 } from '@xyflow/react'
-import { useCallback, useState } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
 import { About } from './About'
 import { Content, useContent } from './Content'
 import styles from './FlowCore.module.scss'
@@ -46,12 +46,19 @@ export const FlowCore = () => {
   )
 
   const { setSelection } = useContent()
+  const [lastSelection, setLastSelection] = useState<ReactNode | null>(null)
   const handleSelectionChange = useCallback<
     (params: { nodes: CLNodeType[]; edges: CLEdgeType[] }) => void
   >(
-    ({ nodes, edges }) =>
-      setSelection(nodes[0]?.data.content || edges[0]?.data?.content || null),
-    [setSelection],
+    ({ nodes, edges }) => {
+      // Dedup
+      const newSelection =
+        nodes[0]?.data.content || edges[0]?.data?.content || null
+      const emit = newSelection !== lastSelection
+      setLastSelection(newSelection)
+      if (emit) setSelection(newSelection)
+    },
+    [lastSelection, setSelection],
   ) as OnSelectionChangeFunc
 
   return (
