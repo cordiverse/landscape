@@ -10,7 +10,8 @@ import {
   BackgroundVariant,
   ReactFlow,
 } from '@xyflow/react'
-import { ReactNode, useCallback, useState } from 'react'
+import type { ReactNode } from 'react'
+import { useCallback, useState } from 'react'
 import { About } from './About'
 import { Content, useContent } from './Content'
 import styles from './FlowCore.module.scss'
