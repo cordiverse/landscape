@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 import mdx from '@mdx-js/rollup'
 
 const DEFAULT_VERSION_CODE = '0'
-const DEFAULT_VERSION_STRING = '"0.0.0 (0)"'
+const DEFAULT_VERSION_STRING = '"v0.0.0 (0)"'
 
 // @ts-expect-error mdx plugin issue?
 // eslint-disable-next-line import/no-default-export

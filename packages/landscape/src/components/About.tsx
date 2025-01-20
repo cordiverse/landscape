@@ -4,7 +4,7 @@ import styles from './About.module.scss'
 export const About = () => (
   <Panel position="bottom-left">
     <div className={styles['text']}>
-      Cordis Landscape v{__DEFINE_CL_APP_VERSION_STRING__} |{' '}
+      Cordis Landscape {__DEFINE_CL_APP_VERSION_STRING__} |{' '}
       <a
         target="_blank"
         rel="noopener noreferrer"
