@@ -27,10 +27,12 @@ export const Content = () => {
   } = useContent()
 
   const show = selectionContent || hoverContent
-  const renderContent = hoverContent ||
+  const renderContent =
+    hoverContent ||
     selectionContent ||
     lastSelectionContent ||
-    lastHoverContent || <></>
+    lastHoverContent ||
+    null
 
   return (
     <Panel
