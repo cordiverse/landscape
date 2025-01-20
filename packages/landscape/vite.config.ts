@@ -4,6 +4,7 @@ import { spawn } from 'node:child_process'
 import { defineConfig } from 'vite'
 import mdx from '@mdx-js/rollup'
 
+// @ts-expect-error mdx plugin issue?
 // eslint-disable-next-line import/no-default-export
 export default defineConfig(async () => {
   const [_, versionString] = await buildVersion()
