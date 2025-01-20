@@ -1,12 +1,12 @@
 .panel-hide {
   opacity: 0;
 
-  max-height: 80vh;
+  // height: auto;
+  // max-height: 80vh;
   max-width: 600px;
 
   transition: opacity 0.3s ease;
 
-  padding: 24px;
   border-radius: 12px;
   color: var(--xy-node-color, var(--xy-node-color-default));
   border: var(--xy-node-border, var(--xy-node-border-default));
@@ -27,4 +27,16 @@
 .panel-show {
   @extend .panel-hide;
   opacity: 1;
+}
+
+.container {
+  overflow-y: auto;
+  height: auto;
+  max-height: 75vh;
+
+  padding: 24px;
+}
+
+.container-inner {
+  margin: 2px;
 }

@@ -39,7 +39,9 @@ export const Content = () => {
       className={show ? styles['panel-show'] : styles['panel-hide']}
       position="top-right"
     >
-      {renderContent}
+      <div className={styles['container']}>
+        <div className={styles['container-inner']}>{renderContent}</div>
+      </div>
     </Panel>
   )
 }
