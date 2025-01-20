@@ -6,6 +6,7 @@ import type {
   ProOptions,
 } from '@xyflow/react'
 import {
+  applyEdgeChanges,
   applyNodeChanges,
   Background,
   BackgroundVariant,
@@ -16,10 +17,15 @@ import { useCallback, useState } from 'react'
 import { About } from './About'
 import { Content, useContent } from './Content'
 import styles from './FlowCore.module.scss'
-import { edges, initialNodes } from './data'
+import { initialEdges, initialNodes } from './data'
 import { CLEdge } from './flow/CLEdge'
 import { CLBaseNode, CLBottomNode, CLNode, CLTopNode } from './flow/CLNode'
-import type { CLEdgeType, CLNodeChange, CLNodeType } from './flow/types'
+import type {
+  CLEdgeChange,
+  CLEdgeType,
+  CLNodeChange,
+  CLNodeType,
+} from './flow/types'
 
 const nodeTypes: NodeTypes = {
   CLBaseNode,
@@ -42,6 +48,7 @@ const proOptions: ProOptions = {
 
 export const FlowCore = () => {
   const [nodes, setNodes] = useState(initialNodes)
+  const [edges, setEdges] = useState(initialEdges)
 
   const onNodesChange = useCallback(
     (changes: CLNodeChange[]) => {
@@ -50,6 +57,14 @@ export const FlowCore = () => {
       setNodes((nds) => applyNodeChanges(filteredChanges, nds))
     },
     [setNodes],
+  )
+  const onEdgesChange = useCallback(
+    (changes: CLEdgeChange[]) => {
+      const filteredChanges = changes.filter((x) => x.type !== 'remove')
+      if (!filteredChanges.length) return
+      setEdges((eds) => applyEdgeChanges(filteredChanges, eds))
+    },
+    [setEdges],
   )
 
   const { setSelection } = useContent()
@@ -75,6 +90,7 @@ export const FlowCore = () => {
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         defaultEdgeOptions={defaultEdgeOptions}
