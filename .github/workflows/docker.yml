@@ -1,0 +1,41 @@
+name: Publish Docker Image
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  docker:
+    name: Docker
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: |
+          sed -i "0,/0/{s/0/$(git rev-list --count HEAD)/g}" packages/landscape/vite.config.ts
+          sed -i "0,/0.0.0 (0)/{s/0.0.0 (0)/$(git describe --tags --dirty) ($(git rev-list --count HEAD))/g}" packages/landscape/vite.config.ts
+          docker buildx build -t ${REGISTRY}/${IMAGE_NAME}:$(git rev-parse --abbrev-ref HEAD)-$(git rev-list --count HEAD) --push .
+        shell: bash
