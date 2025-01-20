@@ -1,7 +1,13 @@
 .container {
   display: flex;
+  align-items: center;
 
+  margin-top: 0;
   margin-bottom: 24px;
+
+  & a {
+    text-decoration: none;
+  }
 }
 
 .separator {

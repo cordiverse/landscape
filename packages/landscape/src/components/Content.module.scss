@@ -8,7 +8,7 @@
   transition: opacity 0.3s ease;
 
   border-radius: 12px;
-  color: var(--xy-node-color, var(--xy-node-color-default));
+  color: #fffff5db;
   border: var(--xy-node-border, var(--xy-node-border-default));
   border-width: 4px;
   background-color: var(
@@ -16,11 +16,13 @@
     var(--xy-node-background-color-default)
   );
 
+  line-height: 24px;
+
   & a {
-    text-decoration: none;
+    text-decoration: underline #fffff5db;
 
     // Override :link :active :hover :visited
-    color: var(--xy-node-color, var(--xy-node-color-default));
+    color: #fffff5db;
   }
 }
 
@@ -39,4 +41,8 @@
 
 .container-inner {
   margin: 2px;
+
+  & > * {
+    margin: 16px 0;
+  }
 }
