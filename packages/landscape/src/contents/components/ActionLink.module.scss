@@ -1,15 +1,12 @@
-.adapter-table {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem 1rem;
-}
+a.a {
+  font-size: 16px;
 
-a.adapter {
+  padding: 24px;
+  margin: 24px 0;
+
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 4rem;
+
   border-radius: 12px;
   background-color: #1a1a1a;
   transition: all 0.3s ease;
@@ -18,6 +15,6 @@ a.adapter {
   user-select: none;
 }
 
-a.adapter:hover {
+a.a:hover {
   background-color: #161616;
 }
