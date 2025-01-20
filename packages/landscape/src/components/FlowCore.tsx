@@ -1,5 +1,6 @@
 import type {
   DefaultEdgeOptions,
+  EdgeTypes,
   NodeTypes,
   OnSelectionChangeFunc,
   ProOptions,
@@ -16,6 +17,7 @@ import { About } from './About'
 import { Content, useContent } from './Content'
 import styles from './FlowCore.module.scss'
 import { edges, initialNodes } from './data'
+import { CLEdge } from './flow/CLEdge'
 import { CLBaseNode, CLBottomNode, CLNode, CLTopNode } from './flow/CLNode'
 import type { CLEdgeType, CLNodeChange, CLNodeType } from './flow/types'
 
@@ -25,6 +27,10 @@ const nodeTypes: NodeTypes = {
   CLBottomNode,
   CLTopNode,
 } as const
+
+const edgeTypes: EdgeTypes = {
+  CLEdge,
+}
 
 const defaultEdgeOptions: DefaultEdgeOptions = {
   animated: true,
@@ -70,6 +76,7 @@ export const FlowCore = () => {
         edges={edges}
         onNodesChange={onNodesChange}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         defaultEdgeOptions={defaultEdgeOptions}
         nodesConnectable={false}
         fitView
