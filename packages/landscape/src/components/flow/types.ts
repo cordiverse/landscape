@@ -30,5 +30,5 @@ export type CLEdgeType = Edge<CLEdgeData>
 export type CLEdgeChange = EdgeChange<CLEdgeType>
 export type CLEdgeProps = EdgeProps<CLEdgeType>
 export interface CLEdgeDataProps {
-  data: CLEdgeData
+  data?: CLEdgeData | undefined
 }

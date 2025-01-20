@@ -2,6 +2,7 @@ import type { BaseEdgeProps, BezierEdgeProps } from '@xyflow/react'
 import { getBezierPath, Position } from '@xyflow/react'
 import { useCallback } from 'react'
 import { useContent } from '../Content'
+import styles from './CLEdge.module.scss'
 import type { CLEdgeDataProps } from './types'
 
 const BaseEdge = ({
@@ -26,7 +27,7 @@ const BaseEdge = ({
         {...props}
         d={path}
         fill="none"
-        className={`react-flow__edge-path ${props.className}`}
+        className={`react-flow__edge-path ${props.className} ${data?.primary ? styles['primary'] : ''}`}
       />
       {interactionWidth && (
         <path
