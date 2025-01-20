@@ -10,16 +10,24 @@ export interface ContentTitleProps {
 export const ContentTitle = ({ id, title, icon, href }: ContentTitleProps) => (
   <div className={styles['container']}>
     <h1 className={styles['title']}>
-      <a target="_blank" rel="noopener noreferrer" href={href}>
-        {title}
-      </a>
+      {href ? (
+        <a target="_blank" rel="noopener noreferrer" href={href}>
+          {title}
+        </a>
+      ) : (
+        title
+      )}
     </h1>
     {icon && (
       <>
         <div className={styles['separator']} />
-        <a target="_blank" rel="noopener noreferrer" href={href}>
+        {href ? (
+          <a target="_blank" rel="noopener noreferrer" href={href}>
+            <img className={styles['icon']} src={`/${id}.png`} />
+          </a>
+        ) : (
           <img className={styles['icon']} src={`/${id}.png`} />
-        </a>
+        )}
       </>
     )}
   </div>
