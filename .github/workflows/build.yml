@@ -28,11 +28,15 @@ jobs:
           corepack enable
           yarn --immutable
           yarn workspace cordis-landscape build
-          mkdir -p dist
-          mv packages/landscape/dist dist
         shell: bash
 
-      - uses: actions/upload-artifact@v4
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: cordis-landscape-${{ github.sha }}
-          path: dist
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
+          external_repository: cordis-bot/landscape
+          publish_branch: main
+          publish_dir: packages/landscape/dist
+          force_orphan: true
+          enable_jekyll: true
+          commit_message: '[skip ci] deploy'
