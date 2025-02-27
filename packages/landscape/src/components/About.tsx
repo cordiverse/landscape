@@ -16,7 +16,7 @@ export const About = () => (
       <a target="_blank" rel="noopener noreferrer" href="https://reactflow.dev">
         React Flow
       </a>
-      {window.__CL_BEIAN__ && (
+      {window.location.href.includes('ilharper.com') && (
         <>
           {' '}
           |{' '}
@@ -25,7 +25,7 @@ export const About = () => (
             rel="noopener noreferrer"
             href="https://beian.miit.gov.cn/"
           >
-            {window.__CL_BEIAN__}
+            {'浙ICP备2021029727号-1'}
           </a>
         </>
       )}
